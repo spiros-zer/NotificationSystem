@@ -1,13 +1,14 @@
 # Notification System Plugin
+The notification system plugin offers a straight-forward way to display notifications to the player. It uses the **CommonUI plugin** for the notification widget, so in order for the plugin to work as expected the CommonUI is necessary.
 
-## Table of Contents
 <!-- TOC -->
 
 ## Core Overview
-The notification system plugin offers a straight-forward way to display notifications to the player. It uses the **CommonUI plugin** for the notification widget.
+The order with which the modules are laid out below is very important as they are built on top of each other. Do not move to the next one if you have not fully understand the one before. The code has been extensively commented and is advised to check the corresponding part while going through the modules.
 
 ### Notification Action Context
 `NotificationActionContext.h` provides an enum that describes the context of the notification's action the player interacted with.
+>Out-of-box supported contexts are `Accept, Declined, Cancelled, Killed and Default`.
 
 ### NotificationAction
 `NotificationAction.h` provides a struct that describes the action that a notification can have. The action itself has a [Notification Action Context](#notification-action-context), text and an equality operator is provided for implementation purposes.
@@ -28,7 +29,7 @@ FNotificationActionDelegate)` will be overwritten since it sets up the notificat
 Actions - subclass of `UBlueprintAsyncActionBase` - are also provided for quality of life. The actions are static and can be called from blueprints to automatically show the requested notification. There are currently four functions that also describe the type of notification that will be displayed.
 
 ### DisplayNotificationAsyncActions
-`DisplayNotificationAsyncActions` provides the functions that create the corresponding notification. It can be subclassed and expanded by the programmer with whatever notification type seems appropriate.
+`DisplayNotificationAsyncActions.h` provides the functions that create the corresponding notification. It can be subclassed and expanded by the programmer with whatever notification type seems appropriate.
 
 - `UDisplayNotificationAsyncActions::ShowNotificationAcknowledgement` displays a notification that acts as an acknowledgement to the player. Has title, body and a single button with hardcoded "OK" text.
 - `UDisplayNotificationAsyncActions::ShowNotificationSingle` displays a notification with a singular button.  Has title, body and a single button with programmer-defined text.
